@@ -1,35 +1,45 @@
-import random
+import secrets
 import string
 
+
 def generate_password(length=12, use_numbers=True, use_symbols=True):
-    """Generoi vahvan salasanan perusparametreilla.
-    
-    Args:
-        length (int): Salasanan pituus.
-        use_numbers (bool): Sisällytetäänkö numerot.
-        use_symbols (bool): Sisällytetäänkö erikoismerkit.
-    
-    Returns:
-        str: Generoitu salasana.
+    """Generate a cryptographically secure password.
+
+    Guarantees at least one digit and one symbol if they are enabled.
     """
 
-    # Perusmerkistö: isot ja pienet kirjaimet
-    characters = string.ascii_letters
+    pools = [string.ascii_letters]
 
     if use_numbers:
-        characters += string.digits
-    
-    if use_symbols:
-        characters += string.punctuation
+        pools.append(string.digits)
 
-    # Satunnainen valinta merkistöstä
-    password = "".join(random.choice(characters) for _ in range(length))
-    return password
+    if use_symbols:
+        pools.append(string.punctuation)
+
+    if length < len(pools):
+        raise ValueError("Password length too short for selected options.")
+
+    # Ensure at least one from each selected group
+    password_chars = [secrets.choice(pool) for pool in pools]
+
+    # Create full character set
+    all_chars = "".join(pools)
+
+    # Fill the rest
+    password_chars += [
+        secrets.choice(all_chars)
+        for _ in range(length - len(password_chars))
+    ]
+
+    # Shuffle securely
+    secrets.SystemRandom().shuffle(password_chars)
+
+    return "".join(password_chars)
 
 
 if __name__ == "__main__":
     print("Password Generator 🔐")
-    
+
     try:
         length = int(input("Anna salasanan pituus (oletus 12): ") or 12)
     except ValueError:
@@ -38,11 +48,13 @@ if __name__ == "__main__":
 
     include_numbers = input("Sisällytetäänkö numerot? (k/e, oletus k): ").lower() != "e"
     include_symbols = input("Sisällytetäänkö erikoismerkit? (k/e, oletus k): ").lower() != "e"
-    
-    password = generate_password(
-        length=length,
-        use_numbers=include_numbers,
-        use_symbols=include_symbols
-    )
 
-    print(f"\nGeneroitu salasana: {password}")
+    try:
+        password = generate_password(
+            length=length,
+            use_numbers=include_numbers,
+            use_symbols=include_symbols
+        )
+        print(f"\nGeneroitu salasana: {password}")
+    except ValueError as e:
+        print(f"Virhe: {e}")
