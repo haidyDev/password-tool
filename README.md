@@ -1,4 +1,10 @@
-# Password Generator 🔐
+# Password Tool 🔐
+
+A small Python tool for generating **cryptographically secure passwords** using the `secrets` module.
+
+---
+
+# Salasanatyökalu
 
 Tämä on pieni harjoitusprojekti, jossa ideana on rakentaa työkalu vahvojen salasanojen luomiseen.
 
