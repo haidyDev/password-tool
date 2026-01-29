@@ -1,44 +1,38 @@
 # Password Tool 🔐
 
-A small Python tool for generating **cryptographically secure passwords** using the `secrets` module.
+Pieni Python-pohjainen työkalu vahvojen ja satunnaisten salasanojen luomiseen.
+Projekti hyödyntää Pythonin `secrets`-moduulia kryptografisesti turvallisten
+salasanojen generoimiseksi.
 
----
+## Projektin tarkoitus
 
-# Salasanatyökalu
+Tämä on harjoitusprojekti, jonka tavoitteena on:
 
-Tämä on pieni harjoitusprojekti, jossa ideana on rakentaa työkalu vahvojen salasanojen luomiseen.
-
-Tavoitteita tässä projektissa:
-
-- harjoitella ohjelmoinnin perusajattelua ja rakenteita
+- harjoitella ohjelmoinnin perusrakenteita ja loogista ajattelua
 - pohtia, millainen on hyvä ja turvallinen salasana
-- rakentaa työkalu, jota olisi helppo käyttää arjessa
+- rakentaa käytännöllinen komentorivityökalu arjen käyttöön
+- tutustua tietoturvan kannalta oikeisiin kirjastoihin ja toimintatapoihin
 
-Projektin tekninen toteutus voi vaihdella eri vaiheissa.  
-Tarkoitus on kokeilla erilaisia tapoja ratkaista sama ongelma ja kehittää ratkaisua vähitellen eteenpäin.
-
-Lisään tarkempaa dokumentaatiota ja teknisiä yksityiskohtia sitä mukaa, kun projekti etenee.
-
----
+Projekti kehittyy vaiheittain, ja ratkaisua parannetaan vähitellen oppimisen edetessä.
 
 ## Tekninen toteutus (versio 1)
 
 Projektin ensimmäinen versio on toteutettu Pythonilla komentorivityökaluna.
 
-Pääkohdat:
-
+Keskeiset ominaisuudet:
 - erillinen `generate_password`-funktio salasanan luontiin
 - valittavissa:
   - salasanan pituus
   - käytetäänkö numeroita
   - käytetäänkö erikoismerkkejä
-- hyödyntää Pythonin vakiokirjastoja (`random` ja `string`)
+- hyödyntää Pythonin vakiokirjastoja (`secrets` ja `string`)
+- varmistaa, että valitut merkkiryhmät sisältyvät salasanaan
 
----
+Salasanat generoidaan satunnaisesti ilman ennustettavaa rakennetta.
 
 ## Käyttö
 
-1. Varmista, että koneella on asennettuna **Python 3**.
+1. Varmista, että koneella on asennettuna Python 3
 2. Aja ohjelma projektikansiosta:
 
 ```bash
